@@ -23,6 +23,23 @@ export default class Login {
 		formAdmin.addEventListener("submit", this.handleSubmitAdmin);
 	}
 
+	errorHandler = (element, active) => {
+		const errorContainer = element.parentElement.querySelector("[role='alert']");
+
+		if(errorContainer !== null && active || !active && errorContainer === null) return;
+		if(!active && errorContainer !== null) return errorContainer.remove();
+
+		let error = document.createElement("div");
+
+		error.textContent = "Identifiant Invalide.";
+		error.style = "margin-top: 10px;";
+
+		error.setAttribute("class", "alert alert-danger");
+		error.setAttribute("role", "alert");
+
+		element.parentElement.appendChild(error);
+	}
+
 	handleSubmitEmployee = (e) => {
 		e.preventDefault();
 		const user = {
@@ -38,7 +55,8 @@ export default class Login {
 			this.PREVIOUS_LOCATION = ROUTES_PATH["Bills"];
 			PREVIOUS_LOCATION = this.PREVIOUS_LOCATION;
 			this.document.body.style.backgroundColor = "#fff";
-		}).catch((err) => this.createUser(user));
+			this.errorHandler(e.target.querySelector(`input[data-testid="employee-email-input"]`), false);
+		}).catch(() => this.errorHandler(e.target.querySelector(`input[data-testid="employee-email-input"]`), true));
 	};
 
 	handleSubmitAdmin = (e) => {
@@ -56,7 +74,8 @@ export default class Login {
 			this.PREVIOUS_LOCATION = ROUTES_PATH["Dashboard"];
 			PREVIOUS_LOCATION = this.PREVIOUS_LOCATION;
 			document.body.style.backgroundColor = "#fff";
-		}).catch((err) => this.createUser(user));
+			this.errorHandler(e.target.querySelector(`input[data-testid="admin-email-input"]`), false);
+		}).catch(() => this.errorHandler(e.target.querySelector(`input[data-testid="admin-email-input"]`), true));
 	};
 
 	// not need to cover this function by tests
