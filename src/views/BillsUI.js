@@ -59,7 +59,7 @@ export default ({ data: bills, loading, error }) => {
 				</div>
 
 				<div id="data-table">
-					${(rowResult === "") ? "<div style='margin: 15px;' class='alert alert-danger' role='alert'>Aucune note de frais." : ""}
+					${(rowResult === "") ? "<div style='margin: 15px;' class='alert alert-danger' role='alert'>Aucune note de frais.</div>" : ""}
 					<table id="example" class="table table-striped" style="width:100%; ${(rowResult === "") ? "display: none;" : ""}">
 						<thead>
 							<tr>
