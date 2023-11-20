@@ -87,6 +87,7 @@ export default class {
 	handleEditTicket(e, bill, bills) {
 		if (this.counter === undefined || this.id !== bill.id) this.counter = 0;
 		if (this.id === undefined || this.id !== bill.id) this.id = bill.id;
+
 		if (this.counter % 2 === 0) {
 			bills.forEach((b) => {
 				$(`#open-bill${b.id}`).css({ background: "#0D5AE5" });
@@ -105,9 +106,9 @@ export default class {
 			this.counter++;
 		}
 		
-		$("#icon-eye-d").click(this.handleClickIconEye);
-		$("#btn-accept-bill").click((e) => this.handleAcceptSubmit(e, bill));
-		$("#btn-refuse-bill").click((e) => this.handleRefuseSubmit(e, bill));
+		$("#icon-eye-d").on("click", this.handleClickIconEye);
+		$("#btn-accept-bill").on("click", (e) => this.handleAcceptSubmit(e, bill));
+		$("#btn-refuse-bill").on("click", (e) => this.handleRefuseSubmit(e, bill));
 	}
 
 	handleAcceptSubmit = (e, bill) => {
@@ -149,7 +150,8 @@ export default class {
 		}
 
 		bills.forEach((bill) => {
-			$(`#open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills));
+			// Fix wrong container select
+			$(`#status-bills-container${this.index} #open-bill${bill.id}`).on("click", (e) => this.handleEditTicket(e, bill, bills));
 		});
 
 		return bills;
