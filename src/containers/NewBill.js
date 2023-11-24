@@ -18,7 +18,7 @@ export default class NewBill {
 		this.billId = null;
 
 		new Logout({ document, localStorage, onNavigate });
-	}
+	};
 
 	isPicture = (mimeType) => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'].includes(mimeType);
 	errorHandler = (element, active) => {
@@ -36,7 +36,7 @@ export default class NewBill {
 		error.setAttribute("role", "alert");
 
 		element.appendChild(error);
-	}
+	};
 	
 	handleChangeFile = (e) => {
 		e.preventDefault();

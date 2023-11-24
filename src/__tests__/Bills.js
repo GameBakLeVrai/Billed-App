@@ -1,6 +1,6 @@
 /**
  * @jest-environment jsdom
- */
+*/
 
 import { screen, waitFor } from "@testing-library/dom";
 import BillsUI from "../views/BillsUI.js";
