@@ -1,6 +1,6 @@
 /**
  * @jest-environment jsdom
- */
+*/
 
 import "@testing-library/jest-dom";
 import { screen, fireEvent } from "@testing-library/dom";
@@ -69,6 +69,8 @@ describe("Given I am connected as an Employee", () => {
 	});
 
 	describe("When I am on NewBill Page and submit form", () => {
+		jest.spyOn(mockStore, "bills");
+
 		test("Then i submit valid form", async () => {
 			const newBill = new NewBill({ document, onNavigate, store: mockStore, localeStorage: localStorageMock, });
 			const handleSubmit = jest.fn(newBill.handleSubmit);
@@ -77,7 +79,7 @@ describe("Given I am connected as an Employee", () => {
 			form.addEventListener("submit", handleSubmit);
 			fireEvent.submit(form);
 
-			expect(handleSubmit).toHaveBeenCalled();
+			expect(mockStore.bills).toHaveBeenCalled();
 		});
 	});
 });
