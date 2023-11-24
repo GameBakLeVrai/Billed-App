@@ -43,8 +43,6 @@ describe("Given I am connected as an Employee", () => {
 			});
 
 			expect(handleChangeFile).toHaveBeenCalled();
-			expect(handleChangeFile).toBeCalled();
-
 			expect(screen.getByText("Envoyer une note de frais")).toBeTruthy();
 		});
 
@@ -66,8 +64,6 @@ describe("Given I am connected as an Employee", () => {
 			});
 
 			expect(handleChangeFile).toHaveBeenCalled();
-			expect(handleChangeFile).toBeCalled();
-
 			expect(screen.getByText("Nous acceptons seulement les images : JPEG / JPG / PNG / GIF")).toBeTruthy();
 		});
 	});
@@ -76,7 +72,7 @@ describe("Given I am connected as an Employee", () => {
 		test("Then i submit valid form", async () => {
 			const newBill = new NewBill({ document, onNavigate, store: mockStore, localeStorage: localStorageMock, });
 			const handleSubmit = jest.fn(newBill.handleSubmit);
-			
+
 			const form = screen.getByTestId("form-new-bill");			
 			form.addEventListener("submit", handleSubmit);
 			fireEvent.submit(form);
